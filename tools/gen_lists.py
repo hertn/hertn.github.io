@@ -2,7 +2,7 @@
 """Write the index.html landing pages into each Stremio list repo (served at the Pages root)."""
 import html, json, os, sys
 
-ROOT = os.path.expanduser('~/seo-work')
+ROOT = os.path.expanduser('~')
 LISTS = [
   dict(repo='christmas-movie-list', h1="Hert's Xmas List", kw='Christmas movies for Stremio',
        title="Christmas Movies for Stremio: Hert's Xmas List",
