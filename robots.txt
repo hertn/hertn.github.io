@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hertn.github.io/sitemap.xml

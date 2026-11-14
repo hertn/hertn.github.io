@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{title}}</title>
+<meta name="description" content="{{desc_attr}}">
+<link rel="canonical" href="{{base}}">
+<meta name="theme-color" content="#121317">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="apple-touch-icon" href="og.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="hertn">
+<meta property="og:title" content="{{title}}">
+<meta property="og:description" content="{{desc_attr}}">
+<meta property="og:url" content="{{base}}">
+<meta property="og:image" content="{{base}}og.png">
+<meta property="og:image:width" content="512">
+<meta property="og:image:height" content="512">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{{ld}}
+</script>
+<style>
+:root{
+  --bg:#121317; --surface:#1b1d23; --surface-2:#262932; --line:#2f323c;
+  --text:#f1f2f5; --text-2:#a8acb8; --text-3:#7f8491;
+  --c1:{{c1}}; --c2:{{c2}}; --r:14px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:17px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+header.hero{text-align:center;padding-top:64px;padding-bottom:36px}
+.hero img{width:88px;height:88px}
+h1{font-size:clamp(2rem,5.5vw,3rem);line-height:1.1;margin:16px 0 6px;letter-spacing:-.02em}
+.kw{color:var(--text-2);margin:0 0 16px;font-size:1.15rem}
+.lede{max-width:660px;margin:0 auto 24px}
+.cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-block;padding:12px 22px;border-radius:999px;text-decoration:none;font-weight:600;border:1px solid var(--line);background:none;color:inherit;font:inherit;font-weight:600;cursor:pointer}
+.btn.primary{background:linear-gradient(135deg,var(--c1),var(--c2));border-color:transparent;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.35)}
+.btn:focus-visible,.chip:focus-visible{outline:3px solid var(--text);outline-offset:3px}
+.manifest{margin:18px auto 0;max-width:560px;color:var(--text-3);font-size:.88rem}
+.manifest code{display:block;margin-top:6px;background:var(--surface-2);padding:8px 10px;border-radius:8px;color:var(--text-2);word-break:break-all;user-select:all}
+section{padding-top:40px;padding-bottom:16px}
+h2{font-size:1.5rem;margin:0 0 16px;letter-spacing:-.01em}
+.count{color:var(--text-3);font-weight:400;font-size:1rem;margin-left:6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:999px;padding:7px 14px;font:inherit;font-size:.92rem;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--c2);border-color:var(--c2);color:#fff}
+.grid{display:grid;gap:16px 14px;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));list-style:none;margin:0;padding:0}
+@media (max-width:480px){.grid{grid-template-columns:repeat(3,1fr);gap:12px 10px}}
+.grid a{text-decoration:none;display:block}
+.grid img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:10px;background:var(--surface-2);display:block}
+.grid span{display:block;font-size:.85rem;line-height:1.3;margin-top:6px}
+.grid small{color:var(--text-3)}
+.more{display:block;margin:20px auto 0}
+.status{color:var(--text-3)}
+.others{border-top:1px solid var(--line);margin-top:48px;padding-top:32px}
+.others ul{display:flex;flex-wrap:wrap;gap:10px;list-style:none;padding:0;margin:0}
+.others a{display:inline-block;padding:8px 14px;border:1px solid var(--line);border-radius:999px;text-decoration:none;background:var(--surface)}
+footer.wrap{border-top:1px solid var(--line);margin-top:40px;padding-top:28px;padding-bottom:44px;color:var(--text-3);font-size:.9rem;text-align:center}
+</style>
+</head>
+<body>
+<main>
+  <header class="hero wrap">
+    <img src="icon.svg" width="88" height="88" alt="">
+    <h1>{{h1}}</h1>
+    <p class="kw">{{kw}}</p>
+    <p class="lede">{{lede}}</p>
+    <div class="cta">
+      <a class="btn primary" id="install" href="stremio://hertn.github.io/{{repo}}/manifest.json">Install in Stremio</a>
+      <a class="btn" id="web" href="https://web.stremio.com/#/addons?addon=https%3A%2F%2Fhertn.github.io%2F{{repo}}%2Fmanifest.json">Install in Stremio Web</a>
+    </div>
+    <p class="manifest">Or open <b>Addons</b> in Stremio and paste this link into the search bar:<code>{{base}}manifest.json</code></p>
+  </header>
+
+  <div class="wrap" id="list" aria-live="polite">
+    {{snapshot}}
+    <noscript><p>The full list is also in the <a href="https://github.com/hertn/{{repo}}#readme">README on GitHub</a>.</p></noscript>
+  </div>
+
+  <nav class="wrap others" aria-labelledby="more-h">
+    <h2 id="more-h">More Stremio lists</h2>
+    <ul>{{others}}<li><a href="https://hertn.github.io/stremio-addon-order/">Stremio Addon Order</a></li><li><a href="https://hertn.github.io/">All projects</a></li></ul>
+  </nav>
+</main>
+<footer class="wrap">
+  Made by <a href="https://github.com/hertn">hertn</a> · <a href="https://github.com/hertn/{{repo}}">Source on GitHub</a> · <a href="https://ko-fi.com/hertn">Support on Ko-fi</a><br>
+  Posters and details come from Stremio's Cinemeta. This addon only lists the titles; it does not host or stream anything. Not affiliated with Stremio.
+</footer>
+<script>
+(async () => {
+  const box = document.getElementById('list');
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const getJSON = async u => { const r = await fetch(u); if (!r.ok) throw new Error(r.status + ' ' + u); return r.json(); };
+  const tiles = metas => metas.map(m => `<li><a href="https://web.stremio.com/#/detail/${esc(m.type)}/${esc(m.id)}"><img src="${esc(m.poster || '')}" alt="" loading="lazy" width="132" height="198"><span>${esc(m.name)} <small>${esc(m.releaseInfo || '')}</small></span></a></li>`).join('');
+  const genresOf = c => (c.extra || []).find(e => e.name === 'genre')?.options || c.genres || [];
+  const genreUrl = (c, g) => `catalog/${c.type}/${c.id}/genre=${encodeURIComponent(g)}.json`;
+  try {
+    const man = await getJSON('manifest.json');
+    const cats = man.catalogs;
+    const big = cats.length > 1 || (await getJSON(`catalog/${cats[0].type}/${cats[0].id}.json`)).metas.length > 200;
+    if (!big) {
+      // Small hand-picked list: every mood as its own section, so the whole list is on the page.
+      const c = cats[0], gs = genresOf(c);
+      const parts = await Promise.all(gs.map(g => getJSON(genreUrl(c, g)).then(d => d.metas).catch(() => [])));
+      box.innerHTML = gs.map((g, i) => parts[i].length ? `<section><h2>${esc(g)}<span class="count">${parts[i].length}</span></h2><ul class="grid">${tiles(parts[i])}</ul></section>` : '').join('');
+      return;
+    }
+    // Big list: pick a catalog and a genre, show a page of posters at a time.
+    const PAGE = 48;
+    let cat = cats[0], genre = genresOf(cat)[0], metas = [], shown = 0;
+    const render = async () => {
+      box.innerHTML = `<section>
+        ${cats.length > 1 ? `<div class="chips" role="group" aria-label="Service">${cats.map((c, i) => `<button class="chip" data-cat="${i}" aria-pressed="${c === cat}">${esc(c.name)}</button>`).join('')}</div>` : ''}
+        <div class="chips" role="group" aria-label="Genre">${genresOf(cat).map(g => `<button class="chip" data-genre="${esc(g)}" aria-pressed="${g === genre}">${esc(g)}</button>`).join('')}</div>
+        <h2>${esc(cats.length > 1 ? cat.name + ': ' + genre : genre)}<span class="count" id="cnt"></span></h2>
+        <ul class="grid" id="g"></ul><button class="btn more" id="more" hidden>Show more</button></section>`;
+      metas = (await getJSON(genreUrl(cat, genre)).catch(() => ({metas: []}))).metas; shown = 0;
+      document.getElementById('cnt').textContent = metas.length;
+      page();
+    };
+    const page = () => {
+      document.getElementById('g').insertAdjacentHTML('beforeend', tiles(metas.slice(shown, shown + PAGE)));
+      shown += PAGE;
+      document.getElementById('more').hidden = shown >= metas.length;
+    };
+    box.addEventListener('click', e => {
+      const b = e.target.closest('button'); if (!b) return;
+      if (b.id === 'more') return page();
+      if (b.dataset.cat) { cat = cats[+b.dataset.cat]; genre = genresOf(cat)[0]; render(); }
+      else if (b.dataset.genre) { genre = b.dataset.genre; render(); }
+    });
+    render();
+  } catch (err) {
+    box.innerHTML = `<p class="status">The list could not be loaded right now. See the <a href="https://github.com/hertn/{{repo}}#readme">README on GitHub</a>.</p>`;
+  }
+})();
+</script>
+</body>
+</html>
