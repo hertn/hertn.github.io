@@ -18,7 +18,7 @@ LISTS = [
        title="80s and 90s Kids Movies for Stremio: Hert's Childhood List",
        desc='A hand-picked list of 80s and 90s childhood movies for Stremio: Disney classics and the Disney Renaissance, animated films, adventure, magic and comedy.',
        lede='A hand-picked <strong>80s and 90s childhood movie list for Stremio</strong>, sorted by mood: Disney classics, the Disney Renaissance, animation, adventure, magic, comedy and musicals.',
-       c1='#ffb340', c2='#e5541b', short='Childhood List'),
+       c1='#ffb340', c2='#c94a17', short='Childhood List'),
   dict(repo='uk-comedy-game-shows', h1='UK Comedy &amp; Game Shows', kw='UK panel shows and game shows for Stremio',
        title='UK Comedy Panel Shows and Game Shows for Stremio',
        desc='Every UK comedy panel show, game show, quiz, chat show and stand-up showcase in one Stremio list. Taskmaster, QI, Would I Lie to You and more.',

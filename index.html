@@ -6,9 +6,12 @@
 <title>Hert Niks: free apps and Stremio lists</title>
 <meta name="description" content="Free apps and Stremio lists by Hert Niks: a RAW photo editor, an iPhone sampler, an Android TV IPTV player, a retro desktop, and Christmas, Halloween and UK TV lists.">
 <link rel="canonical" href="https://hertn.github.io/">
-<meta name="theme-color" content="#121317">
-<link rel="icon" type="image/svg+xml" href="https://hertn.github.io/stremio-addon-order/docs/icon.svg">
-<meta property="og:type" content="website">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/jpeg" href="me.jpg">
+<link rel="apple-touch-icon" href="me.jpg">
+<meta property="og:type" content="profile">
 <meta property="og:title" content="Hert Niks: free apps and Stremio lists">
 <meta property="og:description" content="A RAW photo editor, an iPhone sampler, an Android TV IPTV player, a retro desktop, and hand-picked Stremio lists. All free, no ads.">
 <meta property="og:url" content="https://hertn.github.io/">
@@ -33,83 +36,112 @@
 }
 </script>
 <style>
+/* Light and dark follow the system setting (no switch on the page). */
 :root{
-  --bg:#121317; --surface:#1b1d23; --surface-2:#22252c; --line:#2f323c;
-  --text:#f1f2f5; --text-2:#a8acb8; --text-3:#7f8491; --r:16px;
-  color-scheme:dark;
+  color-scheme:light dark;
+  --bg:#f2f2f7; --group:#ffffff; --text:#1d1d1f; --text-2:#6e6e73;
+  --sep:rgba(60,60,67,.18); --fill:rgba(120,120,128,.16); --fill-press:rgba(120,120,128,.28);
+  --prom-bg:#1d1d1f; --prom-fg:#ffffff;
+  --r:20px;
 }
+@media (prefers-color-scheme:dark){:root{
+  --bg:#000000; --group:#1c1c1e; --text:#f5f5f7; --text-2:#a1a1a6;
+  --sep:rgba(84,84,88,.6); --fill:rgba(120,120,128,.28); --fill-press:rgba(120,120,128,.42);
+  --prom-bg:#f5f5f7; --prom-fg:#000000;
+}}
+@media (prefers-contrast:more){:root{--text-2:var(--text);--sep:var(--text-2)}}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--text);font:17px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+body{margin:0;background:var(--bg);color:var(--text);font:17px/1.5 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
 a{color:inherit}
-.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
-header.wrap{padding-top:64px;padding-bottom:24px;display:flex;gap:28px;align-items:center}
-.me{width:132px;height:132px;border-radius:50%;object-fit:cover;flex:none;border:2px solid var(--line)}
-h1{font-size:clamp(2.2rem,6vw,3.2rem);line-height:1.05;margin:0 0 4px;letter-spacing:-.03em}
-.handle{color:var(--text-3);margin:0 0 12px}
-.lede{color:var(--text-2);max-width:640px;margin:0 0 10px;font-size:1.08rem}
-.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.links a{padding:6px 14px;border:1px solid var(--line);border-radius:999px;text-decoration:none;font-size:.92rem;background:var(--surface)}
-.links a.kofi{background:#cf3532;border-color:#cf3532;color:#fff;font-weight:600}
-.links a:focus-visible{outline:3px solid var(--text);outline-offset:3px}
-@media (max-width:640px){header.wrap{flex-direction:column;align-items:flex-start;gap:18px;padding-top:48px}.me{width:112px;height:112px}}
-section.wrap{padding-top:40px;padding-bottom:8px}
-h2{font-size:1.4rem;margin:0 0 6px;letter-spacing:-.01em}
-.sub{color:var(--text-3);margin:0 0 18px}
-.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));list-style:none;padding:0;margin:0}
-.card{display:flex;gap:16px;align-items:flex-start;padding:18px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);text-decoration:none;height:100%;transition:background .15s}
-.card:hover{background:var(--surface-2)}
-.card:focus-visible{outline:3px solid var(--text);outline-offset:3px}
-.card img{width:56px;height:56px;border-radius:13px;flex:none}
-.card h3{margin:0 0 4px;font-size:1.05rem}
-.card p{margin:0;color:var(--text-2);font-size:.95rem;line-height:1.45}
-.tag{display:inline-block;margin-top:8px;font-size:.78rem;color:var(--text-3);border:1px solid var(--line);border-radius:999px;padding:1px 8px}
-footer.wrap{border-top:1px solid var(--line);margin-top:56px;padding-top:28px;padding-bottom:44px;color:var(--text-3);font-size:.9rem}
-@media (prefers-reduced-motion:reduce){.card{transition:none}}
+.wrap{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Profile */
+.profile{text-align:center;padding-top:64px;padding-bottom:12px}
+.me{width:128px;height:128px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 18px}
+h1{font-size:2.25rem;line-height:1.1;font-weight:700;letter-spacing:-.025em;margin:0}
+.role{color:var(--text-2);margin:6px 0 18px}
+.intro{max-width:34em;margin:0 auto 12px;text-align:left}
+.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:24px}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 20px;border-radius:999px;font-weight:600;font-size:1rem;text-decoration:none;transition:transform .12s,background-color .12s,opacity .12s}
+.btn svg{width:18px;height:18px;flex:none}
+.btn.prominent{background:var(--prom-bg);color:var(--prom-fg)}
+.btn.prominent:hover{opacity:.88}
+.btn.gray{background:var(--fill);color:var(--text)}
+.btn.gray:hover{background:var(--fill-press)}
+.btn:active{transform:scale(.97);opacity:.8}
+a:focus-visible{outline:3px solid #0a84ff;outline-offset:3px;border-radius:12px}
+.btn:focus-visible{border-radius:999px}
+
+/* Grouped lists */
+section{padding-top:36px}
+h2{font-size:1.375rem;font-weight:700;letter-spacing:-.01em;margin:0 4px 4px}
+.sub{color:var(--text-2);margin:0 4px 12px;font-size:.94rem}
+.group{list-style:none;margin:0;padding:0;background:var(--group);border-radius:var(--r);overflow:hidden}
+.row{display:flex;align-items:center;gap:14px;padding:12px 16px;text-decoration:none;min-height:72px;transition:background-color .12s}
+.row:hover{background:var(--fill)}
+.row:active{background:var(--fill-press)}
+.row:focus-visible{outline-offset:-3px;border-radius:var(--r)}
+.row img{width:52px;height:52px;border-radius:12px;flex:none}
+.row .t{flex:1;min-width:0;padding:2px 0}
+.row .name{font-weight:600;display:block}
+.row .desc{color:var(--text-2);font-size:.94rem;line-height:1.35;display:block}
+.row .meta{color:var(--text-2);font-size:.8rem;display:block;margin-top:3px}
+.row .go{width:14px;height:14px;flex:none;color:var(--text-2)}
+.group li{position:relative}
+.group li+li::before{content:"";position:absolute;left:82px;right:0;top:0;border-top:.5px solid var(--sep)}
+
+@media (prefers-reduced-motion:reduce){.btn,.row{transition:none}.btn:active{transform:none}}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="out" viewBox="0 0 14 14"><path d="M4 2.5h7.5V10M11.5 2.5 2.5 11.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
 <main>
-  <header class="wrap">
-    <img class="me" src="me.jpg" width="132" height="132" alt="Hert Niks">
-    <div>
-      <h1>Hert Niks</h1>
-      <p class="handle">hertn on GitHub</p>
-      <p class="lede">Hi! I'm a photographer and content creator: travel, gaming and arts. I'm not a programmer. I design these apps, test them on my own devices, and Claude writes the code. Most of them started because something I wanted didn't exist, or cost a subscription.</p>
-      <p class="lede">Everything here is free, with no ads and no accounts. If something saves you money or makes your day, you can buy me a coffee.</p>
-      <nav class="links" aria-label="Elsewhere">
-        <a class="kofi" href="https://ko-fi.com/hertn">Support me on Ko-fi</a>
-        <a href="https://linktr.ee/hertniks">Linktree</a>
-      </nav>
+  <header class="profile wrap">
+    <img class="me" src="me.jpg" width="128" height="128" alt="Hert Niks">
+    <h1>Hert Niks</h1>
+    <p class="role">Photographer and content creator</p>
+    <p class="intro">Hi! I take photos and make videos about travel, gaming and arts. I'm not a programmer: I design these apps, test them on my own devices, and Claude writes the code. Most of them started because something I wanted didn't exist, or cost a subscription.</p>
+    <p class="intro">Everything here is free, with no ads and no accounts. If something saves you money or makes your day, you can buy me a coffee.</p>
+    <div class="actions">
+      <a class="btn prominent" href="https://ko-fi.com/hertn" target="_blank" rel="noopener">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h11v5.5A4.5 4.5 0 0 1 9.5 16h-2A4.5 4.5 0 0 1 3 11.5V6Zm11 1.5h1.25a2.25 2.25 0 0 1 0 4.5H14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+        Buy me a coffee<span class="sr"> on Ko-fi (opens in a new tab)</span>
+      </a>
+      <a class="btn gray" href="https://linktr.ee/hertniks" target="_blank" rel="noopener">
+        All my links<span class="sr"> on Linktree (opens in a new tab)</span>
+        <svg viewBox="0 0 14 14" aria-hidden="true" style="width:13px;height:13px"><use href="#out"/></svg>
+      </a>
     </div>
   </header>
 
   <section class="wrap" aria-labelledby="apps">
     <h2 id="apps">Apps</h2>
     <p class="sub">For Mac, Windows, Linux, iPhone, iPad, Android TV and the browser.</p>
-    <ul class="grid">
-      <li><a class="card" href="https://hertn.github.io/darkshed/"><img src="https://hertn.github.io/darkshed/icon.svg" alt="" width="56" height="56"><div><h3>DarkShed</h3><p>A free, Lightroom-style RAW and JPEG photo editor that runs in your browser. Photos never leave your device.</p><span class="tag">Mac · Windows · Linux · iPhone · iPad</span></div></a></li>
-      <li><a class="card" href="https://hertn.github.io/ChopPad-app/"><img src="https://hertn.github.io/ChopPad-app/icon.png" alt="" width="56" height="56"><div><h3>ChopPad</h3><p>An MPC-style pad sampler and beat maker. Chop songs into slices and make beats with 16 pads and a sequencer.</p><span class="tag">iPhone · iPad</span></div></a></li>
-      <li><a class="card" href="https://hertn.github.io/LiteTV/"><img src="https://hertn.github.io/LiteTV/icon.png" alt="" width="56" height="56"><div><h3>LiteTV</h3><p>A lightweight IPTV player for your own M3U playlists, with a full TV guide and low memory use.</p><span class="tag">Android TV</span></div></a></li>
-      <li><a class="card" href="https://hertn.github.io/nostalgia-desktop/"><img src="https://hertn.github.io/nostalgia-desktop/logo.svg" alt="" width="56" height="56"><div><h3>Nostalgia Desktop</h3><p>A 1996 to 2005 computer in your browser, with the real music charts, movies, TV and websites of the time.</p><span class="tag">Browser</span></div></a></li>
+    <ul class="group">
+      <li><a class="row" href="https://hertn.github.io/darkshed/" target="_blank" rel="noopener"><img src="https://hertn.github.io/darkshed/icon.svg" alt="" width="52" height="52"><span class="t"><span class="name">DarkShed</span><span class="desc">A free, Lightroom-style RAW and JPEG photo editor in your browser. Photos never leave your device.</span><span class="meta">Mac · Windows · Linux · iPhone · iPad</span><span class="sr"> (opens in a new tab)</span></span><svg class="go" aria-hidden="true"><use href="#out"/></svg></a></li>
+      <li><a class="row" href="https://hertn.github.io/ChopPad-app/" target="_blank" rel="noopener"><img src="https://hertn.github.io/ChopPad-app/icon.png" alt="" width="52" height="52"><span class="t"><span class="name">ChopPad</span><span class="desc">An MPC-style pad sampler and beat maker. Chop songs into slices and make beats.</span><span class="meta">iPhone · iPad</span><span class="sr"> (opens in a new tab)</span></span><svg class="go" aria-hidden="true"><use href="#out"/></svg></a></li>
+      <li><a class="row" href="https://hertn.github.io/LiteTV/" target="_blank" rel="noopener"><img src="https://hertn.github.io/LiteTV/icon.png" alt="" width="52" height="52"><span class="t"><span class="name">LiteTV</span><span class="desc">A lightweight IPTV player for your own M3U playlists, with a full TV guide.</span><span class="meta">Android TV</span><span class="sr"> (opens in a new tab)</span></span><svg class="go" aria-hidden="true"><use href="#out"/></svg></a></li>
+      <li><a class="row" href="https://hertn.github.io/nostalgia-desktop/" target="_blank" rel="noopener"><img src="https://hertn.github.io/nostalgia-desktop/logo.svg" alt="" width="52" height="52"><span class="t"><span class="name">Nostalgia Desktop</span><span class="desc">A 1996 to 2005 computer in your browser, with the real music, movies, TV and websites of the time.</span><span class="meta">Browser</span><span class="sr"> (opens in a new tab)</span></span><svg class="go" aria-hidden="true"><use href="#out"/></svg></a></li>
     </ul>
   </section>
 
   <section class="wrap" aria-labelledby="stremio">
     <h2 id="stremio">Stremio lists</h2>
     <p class="sub">Hand-picked catalogs you can add to Stremio in one click.</p>
-    <ul class="grid">
-      <li><a class="card" href="https://hertn.github.io/christmas-movie-list/"><img src="https://hertn.github.io/christmas-movie-list/icon.svg" alt="" width="56" height="56"><div><h3>Hert's Xmas List</h3><p>Christmas movies sorted by mood: family classics, golden age, cozy, comedy, musicals and animated.</p></div></a></li>
-      <li><a class="card" href="https://hertn.github.io/halloween-movie-list/"><img src="https://hertn.github.io/halloween-movie-list/icon.svg" alt="" width="56" height="56"><div><h3>Hert's Halloween List</h3><p>Horror, slashers, thrillers, monsters and spooky family films, 2006 and earlier.</p></div></a></li>
-      <li><a class="card" href="https://hertn.github.io/childhood-movie-list/"><img src="https://hertn.github.io/childhood-movie-list/icon.svg" alt="" width="56" height="56"><div><h3>Hert's Childhood List</h3><p>80s and 90s kids movies: Disney classics, the Disney Renaissance, animation and adventure.</p></div></a></li>
-      <li><a class="card" href="https://hertn.github.io/uk-tv-list/"><img src="https://hertn.github.io/uk-tv-list/icon.svg" alt="" width="56" height="56"><div><h3>Hert's UK TV</h3><p>UK shows on BBC iPlayer, ITVX, Channel 4 and U&amp;Dave, by genre, updated every week.</p></div></a></li>
-      <li><a class="card" href="https://hertn.github.io/uk-comedy-game-shows/"><img src="https://hertn.github.io/uk-comedy-game-shows/icon.svg" alt="" width="56" height="56"><div><h3>UK Comedy &amp; Game Shows</h3><p>Every UK panel show, game show, quiz, chat show and stand-up showcase.</p></div></a></li>
-      <li><a class="card" href="https://hertn.github.io/stremio-addon-order/"><img src="https://hertn.github.io/stremio-addon-order/docs/icon.svg" alt="" width="56" height="56"><div><h3>Stremio Addon Order</h3><p>Reorder, remove and back up your Stremio addons, right in the browser.</p><span class="tag">Tool</span></div></a></li>
+    <ul class="group">
+      <li><a class="row" href="https://hertn.github.io/christmas-movie-list/" target="_blank" rel="noopener"><img src="https://hertn.github.io/christmas-movie-list/icon.svg" alt="" width="52" height="52"><span class="t"><span class="name">Hert's Xmas List</span><span class="desc">Christmas movies sorted by mood, from family classics to the golden age.</span><span class="sr"> (opens in a new tab)</span></span><svg class="go" aria-hidden="true"><use href="#out"/></svg></a></li>
+      <li><a class="row" href="https://hertn.github.io/halloween-movie-list/" target="_blank" rel="noopener"><img src="https://hertn.github.io/halloween-movie-list/icon.svg" alt="" width="52" height="52"><span class="t"><span class="name">Hert's Halloween List</span><span class="desc">Horror, slashers, thrillers, monsters and spooky family films, 2006 and earlier.</span><span class="sr"> (opens in a new tab)</span></span><svg class="go" aria-hidden="true"><use href="#out"/></svg></a></li>
+      <li><a class="row" href="https://hertn.github.io/childhood-movie-list/" target="_blank" rel="noopener"><img src="https://hertn.github.io/childhood-movie-list/icon.svg" alt="" width="52" height="52"><span class="t"><span class="name">Hert's Childhood List</span><span class="desc">80s and 90s kids movies: Disney classics, animation and adventure.</span><span class="sr"> (opens in a new tab)</span></span><svg class="go" aria-hidden="true"><use href="#out"/></svg></a></li>
+      <li><a class="row" href="https://hertn.github.io/uk-tv-list/" target="_blank" rel="noopener"><img src="https://hertn.github.io/uk-tv-list/icon.svg" alt="" width="52" height="52"><span class="t"><span class="name">Hert's UK TV</span><span class="desc">UK shows on BBC iPlayer, ITVX, Channel 4 and U&amp;Dave, updated every week.</span><span class="sr"> (opens in a new tab)</span></span><svg class="go" aria-hidden="true"><use href="#out"/></svg></a></li>
+      <li><a class="row" href="https://hertn.github.io/uk-comedy-game-shows/" target="_blank" rel="noopener"><img src="https://hertn.github.io/uk-comedy-game-shows/icon.svg" alt="" width="52" height="52"><span class="t"><span class="name">UK Comedy &amp; Game Shows</span><span class="desc">Every UK panel show, game show, quiz, chat show and stand-up showcase.</span><span class="sr"> (opens in a new tab)</span></span><svg class="go" aria-hidden="true"><use href="#out"/></svg></a></li>
+      <li><a class="row" href="https://hertn.github.io/stremio-addon-order/" target="_blank" rel="noopener"><img src="https://hertn.github.io/stremio-addon-order/docs/icon.svg" alt="" width="52" height="52"><span class="t"><span class="name">Stremio Addon Order</span><span class="desc">Reorder, remove and back up your Stremio addons, right in the browser.</span><span class="meta">Tool</span><span class="sr"> (opens in a new tab)</span></span><svg class="go" aria-hidden="true"><use href="#out"/></svg></a></li>
     </ul>
   </section>
 </main>
-<footer class="wrap">
-  <a href="https://github.com/hertn">GitHub</a> · <a href="https://ko-fi.com/hertn">Support on Ko-fi</a>
-</footer>
+<div style="height:56px"></div>
 </body>
 </html>
