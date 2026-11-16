@@ -1,0 +1,50 @@
+# This file is every link on hertn.github.io. Edit it to add, change or remove links.
+#
+# How: open https://github.com/hertn/hertn.github.io/edit/main/links.txt
+# make your change, then press "Commit changes". The page shows it within a minute or two.
+#
+# A section starts with ## and its title. Each section is one tab at the top of the page.
+# Each link is one line:   Name | link | description | label | picture
+#   description: one short line under the name
+#   label: not shown at the moment, you can leave it empty
+# Only Name and link are needed. To skip a field, leave it empty:   Name | link | | | instagram
+# picture: a file in the photos folder (like photos/prints.jpg), a picture link,
+#          or one of these words: instagram, youtube, kofi, camera, photo, mail, globe.
+#          No picture = the first letter of the name.
+# Don't use | inside a name or description. Lines starting with # are notes and don't show up.
+# Move a line up or down to change the order.
+#
+# Special lines:
+#   ## Top buttons       the round buttons under your intro (picture kofi = the Ko-fi logo)
+#   show: instagram      your Instagram profile with your latest posts
+#   show: youtube        your YouTube channels with their latest videos (channels are set in tools/latest.py)
+#   button: GET          a button with this word on every link in the section, like the App Store
+
+## Top buttons
+Contact me | https://ig.me/m/hertniks |  |  | mail
+Buy me a coffee | https://ko-fi.com/hertn |  |  | kofi
+
+## Photos
+show: instagram
+Buy prints | https://hertniks.pixieset.com | Travel and street prints | Shop | photos/prints.jpg
+Free stock photos | https://www.pexels.com/@hert | Use my photos for free on Pexels | Free on Pexels | photos/pexels.jpg
+Archived portfolio | https://hertniks.weebly.com/ | My older wildlife photos | Old wildlife | photos/portfolio.jpg
+
+## Videos
+show: youtube
+
+## Apps
+button: GET
+DarkShed | https://hertn.github.io/darkshed/ | RAW photo editor | Photo editor | https://hertn.github.io/darkshed/icon.svg
+ChopPad | https://hertn.github.io/ChopPad-app/ | Pad sampler and beat maker | Beat maker | https://hertn.github.io/ChopPad-app/icon.png
+LiteTV | https://hertn.github.io/LiteTV/ | IPTV player for Android TV | IPTV player | https://hertn.github.io/LiteTV/icon.png
+Nostalgia Desktop | https://hertn.github.io/nostalgia-desktop/ | Retro 2000s computer | Retro desktop | https://hertn.github.io/nostalgia-desktop/logo.svg
+Stremio Addon Order | https://hertn.github.io/stremio-addon-order/ | Reorder your Stremio addons | Stremio tool | https://hertn.github.io/stremio-addon-order/docs/icon.svg
+
+## Stremio
+button: ADD
+Xmas List | https://hertn.github.io/christmas-movie-list/ | Christmas movies by mood | Movie list | https://hertn.github.io/christmas-movie-list/icon.svg
+Halloween List | https://hertn.github.io/halloween-movie-list/ | Horror and twist thrillers | Movie list | https://hertn.github.io/halloween-movie-list/icon.svg
+Childhood List | https://hertn.github.io/childhood-movie-list/ | 80s and 90s kids movies | Movie list | https://hertn.github.io/childhood-movie-list/icon.svg
+UK TV | https://hertn.github.io/uk-tv-list/ | iPlayer, ITVX and Channel 4 | TV list | https://hertn.github.io/uk-tv-list/icon.svg
+UK Comedy | https://hertn.github.io/uk-comedy-game-shows/ | Panel shows and quizzes | TV list | https://hertn.github.io/uk-comedy-game-shows/icon.svg

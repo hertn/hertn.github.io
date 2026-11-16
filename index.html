@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Hert Niks: free apps and Stremio lists</title>
-<meta name="description" content="Free apps and Stremio lists by Hert Niks: a RAW photo editor, an iPhone sampler, an Android TV IPTV player, a retro desktop, and Christmas, Halloween and UK TV lists.">
+<title>Hert Niks: photos, videos, free apps and Stremio lists</title>
+<meta name="description" content="Hert Niks on Instagram and YouTube, photo prints and free stock photos, plus free apps and Stremio lists: a RAW photo editor, an iPhone sampler, an Android TV IPTV player, a retro desktop, and Christmas, Halloween and UK TV lists.">
 <link rel="canonical" href="https://hertn.github.io/">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
@@ -12,7 +12,7 @@
 <link rel="icon" type="image/jpeg" href="me.jpg">
 <link rel="apple-touch-icon" href="me.jpg">
 <meta property="og:type" content="profile">
-<meta property="og:title" content="Hert Niks: free apps and Stremio lists">
+<meta property="og:title" content="Hert Niks: photos, videos, free apps and Stremio lists">
 <meta property="og:description" content="A RAW photo editor, an iPhone sampler, an Android TV IPTV player, a retro desktop, and hand-picked Stremio lists. All free, no ads.">
 <meta property="og:url" content="https://hertn.github.io/">
 <meta property="og:image" content="https://hertn.github.io/me.jpg">
@@ -31,117 +31,375 @@
   "image": "https://hertn.github.io/me.jpg",
   "jobTitle": "Photographer and content creator",
   "url": "https://hertn.github.io/",
-  "sameAs": ["https://github.com/hertn", "https://ko-fi.com/hertn", "https://linktr.ee/hertniks"]
+  "sameAs": ["https://github.com/hertn", "https://ko-fi.com/hertn", "https://www.instagram.com/hertniks", "https://www.youtube.com/@HertNiks", "https://www.pexels.com/@hert", "https://hertniks.pixieset.com"]
  }
 }
 </script>
 <style>
-/* Light and dark follow the system setting (no switch on the page). */
+/* iOS-style: grouped background, a centred contact card, inset grouped lists, and a floating
+   Liquid Glass tab bar at the bottom that you can slide a finger across. Phone first. */
 :root{
   color-scheme:light dark;
-  --bg:#f2f2f7; --group:#ffffff; --text:#1d1d1f; --text-2:#6e6e73;
-  --sep:rgba(60,60,67,.18); --fill:rgba(120,120,128,.16); --fill-press:rgba(120,120,128,.28);
-  --prom-bg:#1d1d1f; --prom-fg:#ffffff;
-  --r:20px;
+  --bg:#dfe6ee; --wash:rgba(255,255,255,.42); --card:rgba(255,255,255,.72); --text:#000000; --text-2:rgba(40,40,48,.66); --sep:rgba(60,60,67,.16);
+  --fill:rgba(120,120,128,.12); --tint:#007aff; --yt:#ff0033; --ig:#0095f6;
+  --track:rgba(255,255,255,.45); --glass:rgba(249,249,251,.82); --glass-edge:rgba(255,255,255,.75); --lens:rgba(120,120,128,.16);
+  --shadow:0 8px 32px rgba(0,0,0,.12),0 1px 3px rgba(0,0,0,.08);
 }
 @media (prefers-color-scheme:dark){:root{
-  --bg:#000000; --group:#1c1c1e; --text:#f5f5f7; --text-2:#a1a1a6;
-  --sep:rgba(84,84,88,.6); --fill:rgba(120,120,128,.28); --fill-press:rgba(120,120,128,.42);
-  --prom-bg:#f5f5f7; --prom-fg:#000000;
+  --bg:#101318; --wash:rgba(0,0,0,.5); --card:rgba(255,255,255,.12); --text:#ffffff; --text-2:rgba(235,235,245,.7); --sep:rgba(255,255,255,.14);
+  --fill:rgba(120,120,128,.24); --tint:#0a84ff;
+  --track:rgba(255,255,255,.14); --glass:rgba(30,30,33,.82); --glass-edge:rgba(255,255,255,.14); --lens:rgba(255,255,255,.14);
+  --shadow:0 8px 32px rgba(0,0,0,.5);
 }}
-@media (prefers-contrast:more){:root{--text-2:var(--text);--sep:var(--text-2)}}
+@media (prefers-reduced-transparency:reduce){:root{--glass:#f4f4f6;--card:#ffffff;--wash:rgba(255,255,255,.75)}@media (prefers-color-scheme:dark){:root{--glass:#2a2a2e;--card:#1c1c1e;--wash:rgba(0,0,0,.8)}}}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){:root{--glass:#f4f4f6;--card:rgba(255,255,255,.9)}@media (prefers-color-scheme:dark){:root{--glass:#2a2a2e;--card:rgba(44,44,48,.92)}}}
+@media (prefers-contrast:more){:root{--text-2:var(--text)}}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--text);font:17px/1.5 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
-a{color:inherit}
-.wrap{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(var(--wash),var(--wash)),url("photos/wall.jpg") center/cover var(--bg)}
+body{margin:0;background:var(--bg);color:var(--text);font:17px/1.4 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible{outline:2px solid var(--tint);outline-offset:3px;border-radius:12px}
+.wrap{max-width:540px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-/* Profile */
-.profile{text-align:center;padding-top:64px;padding-bottom:12px}
-.me{width:128px;height:128px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 18px}
-h1{font-size:2.25rem;line-height:1.1;font-weight:700;letter-spacing:-.025em;margin:0}
-.role{color:var(--text-2);margin:6px 0 18px}
-.intro{max-width:34em;margin:0 auto 12px;text-align:left}
-.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:24px}
-.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 20px;border-radius:999px;font-weight:600;font-size:1rem;text-decoration:none;transition:transform .12s,background-color .12s,opacity .12s}
-.btn svg{width:18px;height:18px;flex:none}
-.btn.prominent{background:var(--prom-bg);color:var(--prom-fg)}
-.btn.prominent:hover{opacity:.88}
-.btn.gray{background:var(--fill);color:var(--text)}
-.btn.gray:hover{background:var(--fill-press)}
-.btn:active{transform:scale(.97);opacity:.8}
-a:focus-visible{outline:3px solid #0a84ff;outline-offset:3px;border-radius:12px}
-.btn:focus-visible{border-radius:999px}
+/* contact card */
+header{display:grid;grid-template-columns:auto 1fr;column-gap:14px;align-items:start;padding-top:max(20px,calc(env(safe-area-inset-top) + 12px))}
+.me{width:var(--me,76px);height:var(--me,76px);border-radius:50%;object-fit:cover;display:block}
+h1{font-size:1.45rem;line-height:1.15;font-weight:700;letter-spacing:-.02em;margin:0}
+.role{color:var(--text-2);margin:1px 0 0;font-size:.9rem}
+.intro{margin:4px 0 0;text-wrap:pretty;font-size:.9rem;line-height:1.35}
+.actions{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:38px;padding:0 16px;border-radius:999px;font-weight:600;font-size:.88rem;background:var(--card);-webkit-backdrop-filter:blur(20px) saturate(160%);backdrop-filter:blur(20px) saturate(160%);box-shadow:inset 0 0 0 .5px var(--glass-edge);transition:transform .15s,opacity .15s}
+.btn:active{transform:scale(.97);opacity:.75}
+.btn svg{width:18px;height:18px}
+.btn img{width:22px;height:22px}
+.btn.main{background:var(--text);color:var(--bg);box-shadow:none}
 
-/* Grouped lists */
-section{padding-top:36px}
-h2{font-size:1.375rem;font-weight:700;letter-spacing:-.01em;margin:0 4px 4px}
-.sub{color:var(--text-2);margin:0 4px 12px;font-size:.94rem}
-.group{list-style:none;margin:0;padding:0;background:var(--group);border-radius:var(--r);overflow:hidden}
-.row{display:flex;align-items:center;gap:14px;padding:12px 16px;text-decoration:none;min-height:72px;transition:background-color .12s}
-.row:hover{background:var(--fill)}
-.row:active{background:var(--fill-press)}
-.row:focus-visible{outline-offset:-3px;border-radius:var(--r)}
-.row img{width:52px;height:52px;border-radius:12px;flex:none}
-.row .t{flex:1;min-width:0;padding:2px 0}
-.row .name{font-weight:600;display:block}
-.row .desc{color:var(--text-2);font-size:.94rem;line-height:1.35;display:block}
-.row .meta{color:var(--text-2);font-size:.8rem;display:block;margin-top:3px}
-.row .go{width:14px;height:14px;flex:none;color:var(--text-2)}
-.group li{position:relative}
-.group li+li::before{content:"";position:absolute;left:82px;right:0;top:0;border-top:.5px solid var(--sep)}
+/* tab panels */
+main{padding-top:4px}
+[role="tabpanel"]{animation:in .28s ease}
+@keyframes in{from{opacity:0;transform:translateY(6px)}}
+.group{background:var(--card);-webkit-backdrop-filter:blur(20px) saturate(160%);backdrop-filter:blur(20px) saturate(160%);border-radius:26px;overflow:hidden;margin-bottom:14px;box-shadow:inset 0 0 0 .5px var(--glass-edge)}
+.group-h{margin-top:4px;font-size:.78rem;color:var(--text-2);font-weight:600;text-transform:uppercase;letter-spacing:.02em;margin:0 20px 7px}
 
-@media (prefers-reduced-motion:reduce){.btn,.row{transition:none}.btn:active{transform:none}}
+/* rows */
+.list{list-style:none;margin:0;padding:0}
+.list li{position:relative}
+.list li+li::before{content:"";position:absolute;top:0;right:0;left:72px;border-top:.5px solid var(--sep)}
+.item{display:flex;align-items:center;gap:12px;padding:8px 14px;min-height:62px;transition:background-color .15s}
+.item:active{background:var(--fill)}
+.item .pic{width:46px;height:46px;border-radius:11px;object-fit:cover;flex:none;display:grid;place-items:center;background:var(--fill);font-weight:600}
+.item img.pic.icon{box-shadow:0 0 0 .5px var(--sep)}
+.item .pic svg{width:26px;height:26px}
+.item .t{flex:1;min-width:0}
+.item .name{font-weight:600;display:block;line-height:1.3;font-size:1rem}
+.item .desc{color:var(--text-2);font-size:.82rem;line-height:1.3;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+.item .go{width:12px;height:12px;color:var(--text-2);flex:none;opacity:.6}
+.get{flex:none;min-width:70px;text-align:center;padding:6px 0;border-radius:999px;background:var(--fill);color:var(--tint);font-weight:700;font-size:.88rem}
+
+/* widget header rows */
+.w-h{display:flex;align-items:center;gap:12px;padding:9px 14px}
+.w-h>a:not(.follow):not(.subscribe){flex:none;display:block}
+.w-h>img,.w-h>a>img{display:block;width:38px;height:38px;border-radius:50%;object-fit:cover;background:var(--fill)}
+.w-h .t{flex:1;min-width:0;line-height:1.25}
+.w-h .name{font-weight:600;display:block}
+.w-h .meta{color:var(--text-2);font-size:.8rem;display:block}
+.follow,.subscribe{flex:none;display:inline-flex;align-items:center;line-height:1;min-height:32px;padding:0 16px;border-radius:999px;color:#fff;font-weight:600;font-size:.85rem}
+.follow{background:var(--ig)}
+.subscribe{background:var(--yt)}
+.follow:active,.subscribe:active{opacity:.7}
+.chans li+li::before{left:70px}
+.ig-grid{position:relative;overflow:hidden;background:var(--fill)}
+.ig-grid iframe{position:absolute;left:0;top:0;width:400px;height:430px;border:0;transform-origin:0 0}
+
+/* video rows */
+.vrow{display:flex;gap:12px;align-items:center;padding:8px 14px;transition:background-color .15s}
+.vrow:active{background:var(--fill)}
+.vrow .th{width:36%;max-width:150px;flex:none;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:var(--fill)}
+.vrow .th img{display:block;width:100%;height:100%;object-fit:cover}
+.vrow .t{min-width:0}
+.vrow .title{font-size:.9rem;font-weight:600;line-height:1.3;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.vrow .meta{color:var(--text-2);font-size:.78rem;display:block;margin-top:3px}
+.vlist li+li::before{left:16px}
+
+/* floating Liquid Glass tab bar */
+.tabbar{position:sticky;top:0;z-index:10;margin-top:12px;padding:max(8px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) 8px max(16px,env(safe-area-inset-left))}
+.tabbar::before{content:"";position:absolute;inset:0 0 -10px;z-index:-1;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);-webkit-mask-image:linear-gradient(#000 70%,transparent);mask-image:linear-gradient(#000 70%,transparent)}
+.seg{position:relative;display:grid;grid-auto-flow:column;grid-auto-columns:1fr;max-width:508px;margin:0 auto;padding:3px;border-radius:999px;background:var(--track);touch-action:none;user-select:none;-webkit-user-select:none}
+.lens{position:absolute;top:3px;bottom:3px;left:0;border-radius:999px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.18),0 0 1px rgba(0,0,0,.2);transition:transform .35s cubic-bezier(.3,1.3,.5,1),width .35s;pointer-events:none}
+.seg.drag .lens{transition:transform .08s linear;scale:1.06}
+.seg button{position:relative;appearance:none;border:0;background:none;color:var(--text);font:600 .88rem/1 inherit;font-family:inherit;min-height:34px;padding:0 4px;border-radius:999px;cursor:pointer;transition:color .2s}
+.seg button[aria-selected="true"],.seg button.over{color:#000}
+.seg.drag button[aria-selected="true"]:not(.over){color:var(--text)}
+
+footer{color:var(--text-2);font-size:.8rem;text-align:center;padding-top:8px;padding-bottom:max(32px,env(safe-area-inset-bottom))}
+footer a{color:var(--text-2)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="out" viewBox="0 0 14 14"><path d="M4 2.5h7.5V10M11.5 2.5 2.5 11.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="out" viewBox="0 0 14 14"><path d="M5 2.5 9.5 7 5 11.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </svg>
-<main>
-  <header class="profile wrap">
-    <img class="me" src="me.jpg" width="128" height="128" alt="Hert Niks">
+<header class="wrap">
+  <img class="me" src="me.jpg" width="76" height="76" alt="Hert Niks">
+  <div id="about">
     <h1>Hert Niks</h1>
-    <p class="role">Photographer and content creator</p>
-    <p class="intro">Hi! I take photos and make videos about travel, gaming and arts. I'm not a programmer: I design these apps, test them on my own devices, and Claude writes the code. Most of them started because something I wanted didn't exist, or cost a subscription.</p>
-    <p class="intro">Everything here is free, with no ads and no accounts. If something saves you money or makes your day, you can buy me a coffee.</p>
-    <div class="actions">
-      <a class="btn prominent" href="https://ko-fi.com/hertn" target="_blank" rel="noopener">
-        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h11v5.5A4.5 4.5 0 0 1 9.5 16h-2A4.5 4.5 0 0 1 3 11.5V6Zm11 1.5h1.25a2.25 2.25 0 0 1 0 4.5H14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
-        Buy me a coffee<span class="sr"> on Ko-fi (opens in a new tab)</span>
-      </a>
-      <a class="btn gray" href="https://linktr.ee/hertniks" target="_blank" rel="noopener">
-        All my links<span class="sr"> on Linktree (opens in a new tab)</span>
-        <svg viewBox="0 0 14 14" aria-hidden="true" style="width:13px;height:13px"><use href="#out"/></svg>
-      </a>
-    </div>
-  </header>
+    <p class="role">Amateur photographer</p>
+    <p class="intro">Street and travel photos, videos about tech and travel, and free apps with no ads.</p>
+  </div>
+  <div class="actions" id="buttons"></div>
+</header>
+<nav class="tabbar" aria-label="Sections"><div class="seg" role="tablist" id="tabs"><span class="lens" aria-hidden="true"></span></div></nav>
+<main class="wrap" id="links"><noscript><p>Turn on JavaScript to see the links, or find my projects on <a href="https://github.com/hertn" target="_blank" rel="noopener">GitHub</a>.</p></noscript></main>
+<footer class="wrap">© <span id="year">2026</span> Hert Niks</footer>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script>
+// Everything below the intro is built from links.txt, so links can be edited on github.com.
+const ICONS = {
+  instagram: '<rect x="4" y="4" width="20" height="20" rx="6" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="14" cy="14" r="4.6" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="19.6" cy="8.4" r="1.4" fill="currentColor"/>',
+  youtube: '<path d="M11 9.2v9.6l8-4.8z" fill="currentColor"/>',
+  kofi: '<path d="M5 9h14v7a5 5 0 0 1-5 5h-4a5 5 0 0 1-5-5V9Zm14 2h1.5a2.5 2.5 0 0 1 0 5H19" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>',
+  camera: '<path d="M4 9.5A2.5 2.5 0 0 1 6.5 7h2.2l1.6-2.2h7.4L19.3 7h2.2A2.5 2.5 0 0 1 24 9.5v10a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 4 19.5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="14" cy="14.5" r="4" fill="none" stroke="currentColor" stroke-width="2"/>',
+  photo: '<rect x="4" y="6" width="20" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="m6 20 5.5-6 4 4 2.5-2.5L22 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="18.5" cy="10.5" r="1.6" fill="currentColor"/>',
+  mail: '<rect x="4" y="7" width="20" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="m5 9 9 6.5L23 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>',
+  globe: '<circle cx="14" cy="14" r="9.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4.5 14h19M14 4.5c3 3.2 3 15.8 0 19M14 4.5c-3 3.2-3 15.8 0 19" fill="none" stroke="currentColor" stroke-width="2"/>'
+};
+const INSTAGRAM_USER = 'hertniks';
+// Profile photo is as tall as the text beside it: top of the name to the bottom of the intro.
+{
+  const about = document.getElementById('about'), fit = () => {
+    const name = about.querySelector('h1'), last = about.lastElementChild, r = document.createRange();
+    r.selectNodeContents(name); const top = r.getClientRects()[0].top;
+    r.selectNodeContents(last); const rows = r.getClientRects(), bottom = rows[rows.length - 1].bottom;
+    const h = Math.round(bottom - top);
+    document.documentElement.style.setProperty('--me', h + 'px');
+    document.querySelector('.me').style.marginTop = Math.round(top - about.getBoundingClientRect().top) + 'px';
+  };
+  new ResizeObserver(fit).observe(about); document.fonts && document.fonts.ready.then(fit);
+}
+const safeUrl = (u) => /^(https?:|mailto:)/i.test(u || '') ? u : '';
+const safePic = (u) => /^https:\/\//i.test(u || '') || (/^[\w\-./]+\.(jpe?g|png|webp|svg|gif)$/i.test(u || '') && !u.includes('..'));
+const slug = (t) => t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'section';
 
-  <section class="wrap" aria-labelledby="apps">
-    <h2 id="apps">Apps</h2>
-    <p class="sub">For Mac, Windows, Linux, iPhone, iPad, Android TV and the browser.</p>
-    <ul class="group">
-      <li><a class="row" href="https://hertn.github.io/darkshed/" target="_blank" rel="noopener"><img src="https://hertn.github.io/darkshed/icon.svg" alt="" width="52" height="52"><span class="t"><span class="name">DarkShed</span><span class="desc">A free, Lightroom-style RAW and JPEG photo editor in your browser. Photos never leave your device.</span><span class="meta">Mac · Windows · Linux · iPhone · iPad</span><span class="sr"> (opens in a new tab)</span></span><svg class="go" aria-hidden="true"><use href="#out"/></svg></a></li>
-      <li><a class="row" href="https://hertn.github.io/ChopPad-app/" target="_blank" rel="noopener"><img src="https://hertn.github.io/ChopPad-app/icon.png" alt="" width="52" height="52"><span class="t"><span class="name">ChopPad</span><span class="desc">An MPC-style pad sampler and beat maker. Chop songs into slices and make beats.</span><span class="meta">iPhone · iPad</span><span class="sr"> (opens in a new tab)</span></span><svg class="go" aria-hidden="true"><use href="#out"/></svg></a></li>
-      <li><a class="row" href="https://hertn.github.io/LiteTV/" target="_blank" rel="noopener"><img src="https://hertn.github.io/LiteTV/icon.png" alt="" width="52" height="52"><span class="t"><span class="name">LiteTV</span><span class="desc">A lightweight IPTV player for your own M3U playlists, with a full TV guide.</span><span class="meta">Android TV</span><span class="sr"> (opens in a new tab)</span></span><svg class="go" aria-hidden="true"><use href="#out"/></svg></a></li>
-      <li><a class="row" href="https://hertn.github.io/nostalgia-desktop/" target="_blank" rel="noopener"><img src="https://hertn.github.io/nostalgia-desktop/logo.svg" alt="" width="52" height="52"><span class="t"><span class="name">Nostalgia Desktop</span><span class="desc">A 1996 to 2005 computer in your browser, with the real music, movies, TV and websites of the time.</span><span class="meta">Browser</span><span class="sr"> (opens in a new tab)</span></span><svg class="go" aria-hidden="true"><use href="#out"/></svg></a></li>
-    </ul>
-  </section>
+function parse(text) {
+  const sections = [];
+  for (const raw of text.split('\n')) {
+    const line = raw.trim();
+    if (!line || (line.startsWith('#') && !line.startsWith('##'))) continue;
+    if (line.startsWith('##')) {
+      const [title, sub] = line.slice(2).split('|').map((x) => x.trim());
+      sections.push({title, sub: sub || '', links: [], show: [], button: ''}); continue;
+    }
+    if (!sections.length) sections.push({title: '', sub: '', links: [], show: [], button: ''});
+    const cur = sections[sections.length - 1];
+    let m = line.match(/^show:\s*(\w+)/i);
+    if (m) { cur.show.push(m[1].toLowerCase()); continue; }
+    m = line.match(/^button:\s*(.+)$/i);
+    if (m) { cur.button = m[1].trim().slice(0, 8); continue; }
+    if (/^style:/i.test(line)) continue;  // older files: every section now uses the same list
+    const [name, url, desc, meta, pic] = line.split('|').map((x) => x.trim());
+    if (name && safeUrl(url)) cur.links.push({name, url, desc, meta, pic});
+  }
+  return sections.filter((s) => s.links.length || s.show.length);
+}
 
-  <section class="wrap" aria-labelledby="stremio">
-    <h2 id="stremio">Stremio lists</h2>
-    <p class="sub">Hand-picked catalogs you can add to Stremio in one click.</p>
-    <ul class="group">
-      <li><a class="row" href="https://hertn.github.io/christmas-movie-list/" target="_blank" rel="noopener"><img src="https://hertn.github.io/christmas-movie-list/icon.svg" alt="" width="52" height="52"><span class="t"><span class="name">Hert's Xmas List</span><span class="desc">Christmas movies sorted by mood, from family classics to the golden age.</span><span class="sr"> (opens in a new tab)</span></span><svg class="go" aria-hidden="true"><use href="#out"/></svg></a></li>
-      <li><a class="row" href="https://hertn.github.io/halloween-movie-list/" target="_blank" rel="noopener"><img src="https://hertn.github.io/halloween-movie-list/icon.svg" alt="" width="52" height="52"><span class="t"><span class="name">Hert's Halloween List</span><span class="desc">Horror, slashers, thrillers, monsters and spooky family films, 2006 and earlier.</span><span class="sr"> (opens in a new tab)</span></span><svg class="go" aria-hidden="true"><use href="#out"/></svg></a></li>
-      <li><a class="row" href="https://hertn.github.io/childhood-movie-list/" target="_blank" rel="noopener"><img src="https://hertn.github.io/childhood-movie-list/icon.svg" alt="" width="52" height="52"><span class="t"><span class="name">Hert's Childhood List</span><span class="desc">80s and 90s kids movies: Disney classics, animation and adventure.</span><span class="sr"> (opens in a new tab)</span></span><svg class="go" aria-hidden="true"><use href="#out"/></svg></a></li>
-      <li><a class="row" href="https://hertn.github.io/uk-tv-list/" target="_blank" rel="noopener"><img src="https://hertn.github.io/uk-tv-list/icon.svg" alt="" width="52" height="52"><span class="t"><span class="name">Hert's UK TV</span><span class="desc">UK shows on BBC iPlayer, ITVX, Channel 4 and U&amp;Dave, updated every week.</span><span class="sr"> (opens in a new tab)</span></span><svg class="go" aria-hidden="true"><use href="#out"/></svg></a></li>
-      <li><a class="row" href="https://hertn.github.io/uk-comedy-game-shows/" target="_blank" rel="noopener"><img src="https://hertn.github.io/uk-comedy-game-shows/icon.svg" alt="" width="52" height="52"><span class="t"><span class="name">UK Comedy &amp; Game Shows</span><span class="desc">Every UK panel show, game show, quiz, chat show and stand-up showcase.</span><span class="sr"> (opens in a new tab)</span></span><svg class="go" aria-hidden="true"><use href="#out"/></svg></a></li>
-      <li><a class="row" href="https://hertn.github.io/stremio-addon-order/" target="_blank" rel="noopener"><img src="https://hertn.github.io/stremio-addon-order/docs/icon.svg" alt="" width="52" height="52"><span class="t"><span class="name">Stremio Addon Order</span><span class="desc">Reorder, remove and back up your Stremio addons, right in the browser.</span><span class="meta">Tool</span><span class="sr"> (opens in a new tab)</span></span><svg class="go" aria-hidden="true"><use href="#out"/></svg></a></li>
-    </ul>
-  </section>
-</main>
-<div style="height:56px"></div>
+function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text) e.textContent = text; return e; }
+function img(src, alt, cls) { const i = el('img', cls); i.src = src; i.alt = alt || ''; i.loading = 'lazy'; return i; }
+function link(cls, url) {
+  const a = el('a', cls); a.href = safeUrl(url);
+  if (!/^mailto:/i.test(url)) { a.target = '_blank'; a.rel = 'noopener'; }
+  return a;
+}
+function srNewTab(a) { if (a.target) a.append(el('span', 'sr', ' (opens in a new tab)')); }
+function svg(key) { return '<svg viewBox="0 0 28 28" aria-hidden="true">' + ICONS[key] + '</svg>'; }
+function li(child) { const l = el('li'); l.append(child); return l; }
+
+function picture(l) {
+  const key = (l.pic || '').toLowerCase();
+  if (l.pic && safePic(l.pic)) return img(l.pic, '', 'pic' + (/^photos\//.test(l.pic) ? '' : ' icon'));
+  const box = el('span', 'pic');
+  if (ICONS[key]) box.innerHTML = svg(key); else box.textContent = l.name.charAt(0).toUpperCase();
+  return box;
+}
+
+// Every section's links: a row with picture, name, one line of description, and a button or arrow.
+function list(links, button) {
+  const ul = el('ul', 'list');
+  for (const l of links) {
+    const a = link('item', l.url), t = el('span', 't');
+    t.append(el('span', 'name', l.name));
+    if (l.desc) t.append(el('span', 'desc', l.desc));
+    srNewTab(t);
+    a.append(picture(l), t);
+    if (button) a.append(el('span', 'get', button));
+    else a.insertAdjacentHTML('beforeend', '<svg class="go" aria-hidden="true"><use href="#out"/></svg>');
+    ul.append(li(a));
+  }
+  const g = el('div', 'group'); g.append(ul); return g;
+}
+
+// Instagram's embed has a white header we can't restyle, so we draw our own header and
+// show only the embed's 3 x 2 photo grid. At 400px wide the grid starts 146px down and is 268px tall.
+const IG = {w: 400, top: 148, h: 264};  // trimmed 2px top and bottom: the embed draws white lines at the grid edges
+function instagram() {
+  const card = el('div', 'group'), head = el('div', 'w-h');
+  const url = 'https://www.instagram.com/' + INSTAGRAM_USER + '/';
+  const t = el('div', 't'), name = link('name', url); name.textContent = INSTAGRAM_USER; t.append(name);
+  t.append(el('span', 'meta', 'Instagram'));
+  const follow = link('follow', url); follow.textContent = 'Follow';
+  follow.setAttribute('aria-label', 'Follow @' + INSTAGRAM_USER + ' on Instagram (opens in a new tab)');
+  head.append(img('me.jpg', ''), t, follow);
+  const grid = el('div', 'ig-grid'), f = el('iframe');
+  f.title = 'Latest Instagram posts by @' + INSTAGRAM_USER; f.setAttribute('scrolling', 'no'); f.tabIndex = -1;
+  grid.append(f); card.append(head, grid);
+  new ResizeObserver(() => {
+    const k = grid.clientWidth / IG.w;
+    grid.style.height = Math.round(IG.h * k) + 'px';
+    f.style.transform = 'scale(' + k + ') translateY(-' + IG.top + 'px)';
+  }).observe(grid);
+  // The embed scrolls the page to itself when it loads. Load it only when it is near the
+  // screen, and put the page back unless the visitor scrolled on their own.
+  let touched = false;
+  for (const ev of ['wheel', 'touchstart', 'keydown', 'mousedown']) addEventListener(ev, () => { touched = true; }, {passive: true});
+  const start = new IntersectionObserver(([e]) => {
+    if (!e.isIntersecting) return;
+    start.disconnect(); touched = false;
+    const y = scrollY;
+    const keep = () => { if (!touched && Math.abs(scrollY - y) > 2) scrollTo({top: y, behavior: 'instant'}); };
+    addEventListener('scroll', keep);
+    setTimeout(() => removeEventListener('scroll', keep), 4000);
+    f.src = url + 'embed/';
+  }, {rootMargin: '400px 0px'});
+  start.observe(grid);
+  return card;
+}
+
+function ago(iso) {
+  const s = (Date.now() - new Date(iso)) / 1000;
+  for (const [n, w] of [[31536000, 'year'], [2592000, 'month'], [604800, 'week'], [86400, 'day'], [3600, 'hour']]) {
+    if (s >= n) { const k = Math.floor(s / n); return k + ' ' + w + (k > 1 ? 's' : '') + ' ago'; }
+  }
+  return 'just now';
+}
+const short = (n) => n >= 1e6 ? (n / 1e6).toFixed(1).replace('.0', '') + 'M' : n >= 1e3 ? (n / 1e3).toFixed(1).replace('.0', '') + 'K' : String(n);
+
+function youtube() {
+  const box = el('div'); box.hidden = true;
+  fetch('latest.json', {cache: 'no-cache'}).then((r) => r.json()).then((d) => {
+    const chans = el('ul', 'list chans'), vids = [];
+    for (const c of d.youtube || []) {
+      const head = el('div', 'w-h');
+      const pic = link('', c.url); pic.append(img(c.avatar || '', '')); pic.tabIndex = -1; pic.setAttribute('aria-hidden', 'true');
+      const t = el('div', 't'), name = link('name', c.url); name.textContent = c.name; t.append(name);
+      t.append(el('span', 'meta', c.subscribers ? c.subscribers + ' subscribers' : c.handle || ''));
+      const sub = link('subscribe', c.url + '?sub_confirmation=1'); sub.textContent = 'Subscribe';
+      sub.setAttribute('aria-label', 'Subscribe to ' + c.name + ' on YouTube (opens in a new tab)');
+      head.append(pic, t, sub); chans.append(li(head));
+      for (const v of c.videos) vids.push({...v, channel: c.name});
+    }
+    vids.sort((x, y) => (y.published || '').localeCompare(x.published || ''));
+    vids.length = Math.min(vids.length, 4);  // the 4 newest, from whichever channel
+    const ul = el('ul', 'list vlist');
+    for (const v of vids) {
+      const a = link('vrow', v.url), th = el('span', 'th'), t = el('span', 't');
+      th.append(img('https://i.ytimg.com/vi/' + encodeURIComponent(v.id) + '/mqdefault.jpg'));
+      t.append(el('span', 'title', v.title), el('span', 'meta', v.channel + ' · ' + ago(v.published)));
+      srNewTab(t); a.append(th, t); ul.append(li(a));
+    }
+    const g1 = el('div', 'group'), g2 = el('div', 'group'); g1.append(chans); g2.append(ul);
+    box.append(g1, el('p', 'group-h', 'Latest videos'), g2); box.hidden = false;
+  }).catch(() => {});  // no videos yet: stays hidden
+  return box;
+}
+
+function renderButtons(links) {
+  const box = document.getElementById('buttons'); box.textContent = '';
+  links.forEach((l, i) => {
+    const a = link('btn' + (i === links.length - 1 ? ' main' : ''), l.url), key = (l.pic || '').toLowerCase();
+    if (key === 'kofi') a.append(img('kofi.png'));
+    else if (ICONS[key]) a.insertAdjacentHTML('beforeend', svg(key));
+    a.append(el('span', '', l.name)); srNewTab(a); box.append(a);
+  });
+}
+
+function render(sections) {
+  const root = document.getElementById('links'), tabs = document.getElementById('tabs'), lens = tabs.querySelector('.lens');
+  root.textContent = '';
+  const panels = [];
+  for (const s of sections) {
+    if (s.title.toLowerCase() === 'top buttons') { renderButtons(s.links); continue; }
+    const id = slug(s.title), panel = el('section');
+    panel.id = id; panel.setAttribute('role', 'tabpanel');
+    const tab = el('button'); tab.id = 'tab-' + id; tab.type = 'button';
+    tab.textContent = s.title;
+    tab.setAttribute('role', 'tab'); tab.setAttribute('aria-controls', id); panel.setAttribute('aria-labelledby', tab.id);
+    if (s.show.includes('instagram')) panel.append(instagram());
+    if (s.show.includes('youtube')) panel.append(youtube());
+    if (s.links.length) panel.append(list(s.links, s.button));
+    tabs.append(tab); root.append(panel); panels.push({id, tab, panel});
+  }
+  let current = null;
+  const placeLens = (tab) => { lens.style.width = tab.offsetWidth + 'px'; lens.style.transform = 'translateX(' + tab.offsetLeft + 'px)'; };
+  const show = (id, opts = {}) => {
+    const pick = panels.find((p) => p.id === id) || panels[0];
+    for (const p of panels) {
+      const on = p === pick;
+      p.tab.setAttribute('aria-selected', on); p.tab.tabIndex = on ? 0 : -1; p.panel.hidden = !on;
+    }
+    placeLens(pick.tab);
+    if (opts.focus) pick.tab.focus();
+    if (opts.save) history.replaceState(null, '', '#' + pick.id);
+    if (current && current !== pick && tabs.parentNode.getBoundingClientRect().top <= 1) scrollTo(0, root.offsetTop - tabs.parentNode.offsetHeight);  // switching while scrolled: show the new tab from its top
+    current = pick;
+  };
+  panels.forEach((p, i) => {
+    p.tab.onclick = (e) => { if (e.detail === 0) show(p.id, {save: true}); };  // Enter / Space from the keyboard
+    p.tab.onkeydown = (e) => {  // arrow keys move between tabs, like a native tab bar
+      const d = {ArrowRight: 1, ArrowLeft: -1}[e.key]; if (!d) return;
+      show(panels[(i + d + panels.length) % panels.length].id, {focus: true, save: true});
+    };
+  });
+  // Slide a finger (or mouse) along the bar: the glass lens follows, and the tab under it is
+  // picked when you let go. A plain tap works the same way.
+  const tabAt = (x) => panels.reduce((best, p) => {
+    const r = p.tab.getBoundingClientRect(), d = Math.abs(x - (r.left + r.width / 2));
+    return d < best.d ? {p, d} : best;
+  }, {p: panels[0], d: Infinity}).p;
+  let drag = null;
+  tabs.addEventListener('pointerdown', (e) => {
+    drag = {id: e.pointerId, x: e.clientX, moved: false}; tabs.setPointerCapture(e.pointerId);
+  });
+  const moveLens = (x) => {
+    const bar = tabs.getBoundingClientRect(), w = current.tab.offsetWidth;
+    const left = Math.max(5, Math.min(bar.width - w - 5, x - bar.left - w / 2));
+    lens.style.transform = 'translateX(' + left + 'px)';
+    const over = tabAt(x); panels.forEach((p) => p.tab.classList.toggle('over', p === over));
+  };
+  tabs.addEventListener('pointermove', (e) => {
+    if (!drag || e.pointerId !== drag.id) return;
+    if (!drag.moved) {  // a tap only springs the pill to the tab; following the finger starts after a real slide
+      if (Math.abs(e.clientX - drag.x) < 8) return;
+      drag.moved = true; tabs.classList.add('drag');
+    }
+    moveLens(e.clientX);
+  });
+  const end = (e) => {
+    if (!drag || e.pointerId !== drag.id) return;
+    drag = null; tabs.classList.remove('drag'); panels.forEach((p) => p.tab.classList.remove('over'));
+    show(tabAt(e.clientX).id, {save: true});
+  };
+  tabs.addEventListener('pointerup', end);
+  tabs.addEventListener('pointercancel', (e) => { if (drag) { drag = null; tabs.classList.remove('drag'); panels.forEach((p) => p.tab.classList.remove('over')); placeLens(current.tab); } });
+  addEventListener('resize', () => current && placeLens(current.tab));
+  show(location.hash.slice(1));
+  addEventListener('hashchange', () => show(location.hash.slice(1)));
+}
+
+fetch('links.txt', {cache: 'no-cache'}).then((r) => { if (!r.ok) throw new Error(r.status); return r.text(); })
+  .then((t) => render(parse(t)))
+  .catch(() => { document.getElementById('links').innerHTML = '<p class="wrap">The links could not be loaded right now. Find my projects on <a href="https://github.com/hertn" target="_blank" rel="noopener">GitHub</a>.</p>'; });
+</script>
 </body>
 </html>
