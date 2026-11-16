@@ -445,7 +445,7 @@ function render(sections) {
       pg.on = true; pg.w = root.clientWidth; pg.left = {};
       for (const p of panels) pg.left[p.tab.id] = p.tab.offsetLeft;
       lens.style.transition = 'none'; tabs.classList.add('swiping'); root.classList.add('paging');
-      const bar = tabs.parentNode.getBoundingClientRect().bottom, top = Math.max(0, bar - root.getBoundingClientRect().top);
+      const bar = tabs.parentNode.getBoundingClientRect().bottom, top = Math.max(0, bar - root.getBoundingClientRect().top) + current.panel.offsetTop;  // offsetTop = main's top padding, so the incoming tab lands exactly where it will sit
       current.panel.style.animation = 'none';
       for (const [d, p] of [[-1, neighbour(-1)], [1, neighbour(1)]]) if (p) {
         p.panel.hidden = false;
