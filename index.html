@@ -142,6 +142,9 @@ main.paging{will-change:transform}
 
 footer{color:var(--text-2);font-size:.8rem;text-align:center;padding-top:8px;padding-bottom:max(32px,env(safe-area-inset-bottom))}
 footer a{color:var(--text-2)}
+/* While swiping, the next tab floats beside the current one, so the footer would sit mid-page; hide it until the swipe ends. */
+footer{transition:opacity .15s}
+main.paging+footer{opacity:0}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 <script data-goatcounter="https://hertn.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
