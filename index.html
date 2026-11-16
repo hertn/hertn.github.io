@@ -219,6 +219,11 @@ function link(cls, url) {
   if (!/^mailto:/i.test(url)) { a.target = '_blank'; a.rel = 'noopener'; }
   return a;
 }
+// Count link taps in GoatCounter. Swipes are blocked in the capture phase, so they never reach here.
+document.addEventListener('click', (e) => {
+  const a = e.target.closest('a[href]');
+  if (a && window.goatcounter && goatcounter.count) goatcounter.count({path: a.href.replace(/^[a-z]+:(\/\/)?(www\.)?/i, ''), title: a.href, event: true});
+});
 function srNewTab(a) { if (a.target) a.append(el('span', 'sr', ' (opens in a new tab)')); }
 function svg(key) { return '<svg viewBox="0 0 28 28" aria-hidden="true">' + ICONS[key] + '</svg>'; }
 function li(child) { const l = el('li'); l.append(child); return l; }
