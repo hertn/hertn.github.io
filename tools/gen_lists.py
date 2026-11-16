@@ -34,7 +34,7 @@ LISTS = [
 def esc(x): return html.escape(str(x), quote=True)
 
 def tiles(metas):
-    return ''.join(f'<li><a href="https://web.stremio.com/#/detail/{esc(m["type"])}/{esc(m["id"])}"><img src="{esc(m.get("poster",""))}" alt="" loading="lazy" width="132" height="198"><span>{esc(m["name"])} <small>{esc(m.get("releaseInfo",""))}</small></span></a></li>' for m in metas)
+    return ''.join(f'<li><a href="https://web.stremio.com/#/detail/{esc(m["type"])}/{esc(m["id"])}" target="_blank" rel="noopener"><img src="{esc(m.get("poster",""))}" alt="" loading="lazy" width="132" height="198"><span>{esc(m["name"])} <small>{esc(m.get("releaseInfo",""))}</small></span></a></li>' for m in metas)
 
 def snapshot(repo):
     # shortcut: snapshot is from the day this script ran; the live script refreshes it, rerun after big list edits.
@@ -57,7 +57,7 @@ TPL = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'list_templa
 
 for L in LISTS:
     base = f"https://hertn.github.io/{L['repo']}/"
-    others = ''.join(f'<li><a href="https://hertn.github.io/{o["repo"]}/">{o["short"]}</a></li>' for o in LISTS if o is not L)
+    others = ''.join(f'<li><a href="https://hertn.github.io/{o["repo"]}/" target="_blank" rel="noopener">{o["short"]}</a></li>' for o in LISTS if o is not L)
     ld = {
         "@context": "https://schema.org", "@type": "CollectionPage",
         "name": html.unescape(L['title']), "description": L['desc'], "url": base,
