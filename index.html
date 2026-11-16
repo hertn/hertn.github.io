@@ -80,8 +80,11 @@ h1{font-size:1.45rem;line-height:1.15;font-weight:700;letter-spacing:-.02em;marg
 /* tab panels */
 main{padding-top:4px;position:relative}
 [role="tabpanel"]{animation:in .28s ease}
+main.paging{will-change:transform}
+.seg.swiping button[aria-selected="true"]:not(.over){color:var(--text)}
+.seg.swiping button{transition:none}
 @keyframes in{from{opacity:0;transform:translateY(6px)}}
-.group{background:var(--card);-webkit-backdrop-filter:blur(20px) saturate(160%);backdrop-filter:blur(20px) saturate(160%);border-radius:26px;overflow:hidden;margin-bottom:14px;box-shadow:inset 0 0 0 .5px var(--glass-edge)}
+.group{background:var(--card);border-radius:26px;overflow:hidden;margin-bottom:14px;box-shadow:inset 0 0 0 .5px var(--glass-edge)}
 .group-h{margin-top:4px;font-size:.78rem;color:var(--text-2);font-weight:600;text-transform:uppercase;letter-spacing:.02em;margin:0 20px 7px}
 
 /* rows */
@@ -133,6 +136,7 @@ main{padding-top:4px;position:relative}
 .seg.drag .lens{transition:transform .08s linear;scale:1.06}
 .seg button{position:relative;appearance:none;border:0;background:none;color:var(--text);font-family:inherit;font-size:1rem;font-weight:600;line-height:1;min-height:38px;padding:0 4px;border-radius:999px;cursor:pointer;transition:color .2s}
 .seg button[aria-selected="true"],.seg button.over{color:#000}
+.seg button.fade:not(.over){color:var(--text)}
 .seg.drag button[aria-selected="true"]:not(.over){color:var(--text)}
 
 footer{color:var(--text-2);font-size:.8rem;text-align:center;padding-top:8px;padding-bottom:max(32px,env(safe-area-inset-bottom))}
@@ -409,10 +413,11 @@ function render(sections) {
     current.panel.style.animation = '';
   };
   const neighbour = (d) => panels[panels.indexOf(current) + d];
+  // Tabs are equal width, so the pill only moves (no width change, no layout). Positions are measured once per swipe.
   const lensBetween = (a, b, t) => {
-    lens.style.transition = 'none'; lens.style.width = (a.offsetWidth + (b.offsetWidth - a.offsetWidth) * t) + 'px';
-    lens.style.transform = 'translateX(' + (a.offsetLeft + (b.offsetLeft - a.offsetLeft) * t) + 'px)';
-    tabs.classList.add('drag'); a.classList.toggle('over', t < .5); b.classList.toggle('over', t >= .5);  // dark text on whichever tab the pill covers
+    lens.style.transform = 'translateX(' + (pg.left[a.id] + (pg.left[b.id] - pg.left[a.id]) * t) + 'px)';
+    const near = t < .5 ? a : b;
+    if (pg.near !== near) { pg.near = near; a.classList.toggle('over', near === a); b.classList.toggle('over', near === b); }  // dark text on whichever tab the pill covers
   };
   document.addEventListener('pointerdown', (e) => {
     if (e.pointerType !== 'touch' || !e.isPrimary || tabs.contains(e.target) || e.clientX < 24 || e.clientX > innerWidth - 24) return;
@@ -424,7 +429,9 @@ function render(sections) {
     if (!pg.on) {
       if (Math.abs(dx) < 10 && Math.abs(dy) < 10) return;
       if (Math.abs(dx) < Math.abs(dy) * 1.2) { pg = null; return; }  // a vertical scroll, leave it alone
-      pg.on = true; pg.w = root.clientWidth;
+      pg.on = true; pg.w = root.clientWidth; pg.left = {};
+      for (const p of panels) pg.left[p.tab.id] = p.tab.offsetLeft;
+      lens.style.transition = 'none'; tabs.classList.add('swiping'); root.classList.add('paging');
       const bar = tabs.parentNode.getBoundingClientRect().bottom, top = Math.max(0, bar - root.getBoundingClientRect().top);
       current.panel.style.animation = 'none';
       for (const [d, p] of [[-1, neighbour(-1)], [1, neighbour(1)]]) if (p) {
@@ -433,22 +440,30 @@ function render(sections) {
       }
     }
     pg.dx = (dx > 0 ? !neighbour(-1) : !neighbour(1)) ? dx / 3 : dx;  // rubber band past the first and last tab
-    root.style.transform = 'translateX(' + pg.dx + 'px)';
     pg.track.push([e.timeStamp, e.clientX]); if (pg.track.length > 6) pg.track.shift();
-    const to = neighbour(pg.dx < 0 ? 1 : -1);
-    if (to) lensBetween(current.tab, to.tab, Math.min(1, Math.abs(pg.dx) / pg.w));
+    if (!pg.frame) pg.frame = requestAnimationFrame(() => {  // at most one paint per screen refresh
+      if (!pg) return;
+      pg.frame = 0;
+      root.style.transform = 'translate3d(' + pg.dx + 'px,0,0)';
+      const to = neighbour(pg.dx < 0 ? 1 : -1);
+      if (to) lensBetween(current.tab, to.tab, Math.min(1, Math.abs(pg.dx) / pg.w));
+    });
   });
   const release = (e, cancelled) => {
     if (!pg) return;
     const g = pg; pg = null;
     if (!g.on) return;
+    cancelAnimationFrame(g.frame);
     const [t0, x0] = g.track[0], v = (e.clientX - x0) / Math.max(1, e.timeStamp - t0);  // px per ms
     const d = g.dx < 0 ? 1 : -1, to = neighbour(d);
     const go = !cancelled && to && (Math.abs(g.dx) > g.w / 3 || (Math.abs(v) > 0.35 && Math.sign(v) === -d));
-    lens.style.transition = ''; tabs.classList.remove('drag'); panels.forEach((p) => p.tab.classList.remove('over'));
-    root.style.transition = 'transform .3s cubic-bezier(.2,.8,.2,1)';
-    root.style.transform = go ? 'translateX(' + (-d * (g.w + GAP)) + 'px)' : '';
-    if (!go) placeLens(current.tab);
+    // Content and pill finish together with the same curve and duration.
+    const ease = 'transform .3s cubic-bezier(.2,.8,.2,1)';
+    tabs.classList.remove('swiping'); panels.forEach((p) => p.tab.classList.remove('over'));
+    if (go) { to.tab.classList.add('over'); current.tab.classList.add('fade'); }
+    lens.style.transition = ease; lens.style.transform = 'translateX(' + g.left[(go ? to : current).tab.id] + 'px)';
+    root.style.transition = ease;
+    root.style.transform = go ? 'translate3d(' + (-d * (g.w + GAP)) + 'px,0,0)' : '';
     // A swipe that ended on a link must not open it.
     const block = (c) => { c.preventDefault(); c.stopPropagation(); };
     addEventListener('click', block, {capture: true, once: true});
@@ -456,7 +471,8 @@ function render(sections) {
     const done = (t) => {
       if (t.target !== root) return;  // ignore transitions of things inside the page
       root.removeEventListener('transitionend', done);
-      resetPager();
+      resetPager(); root.classList.remove('paging'); lens.style.transition = '';
+      panels.forEach((p) => p.tab.classList.remove('over', 'fade'));
       if (go) { to.panel.style.cssText = 'animation:none'; show(to.id, {save: true}); }
     };
     root.addEventListener('transitionend', done);
