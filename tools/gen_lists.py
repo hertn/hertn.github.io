@@ -12,7 +12,7 @@ LISTS = [
   dict(repo='halloween-movie-list', h1="Hert's Halloween List", kw='Halloween and horror movies for Stremio',
        title="Halloween Horror Movies for Stremio: Hert's Halloween List",
        desc='A hand-picked list of 162 Halloween movies for Stremio: classic horror, slashers, thrillers, monsters, horror comedy and family frights, 2006 and earlier.',
-       lede='A hand-picked <strong>Halloween and horror movie list for Stremio</strong>: Hitchcock, slashers, the supernatural, monsters and zombies, horror comedy and family-friendly spooky films. Everything from 2006 and earlier.',
+       lede='A hand-picked list of <strong>162 Halloween and horror movies for Stremio</strong>: Hitchcock, slashers, the supernatural, twist thrillers, monsters and zombies, horror comedy and family-friendly spooky films. Everything from 2006 and earlier.',
        c1='#ff9f43', c2='#c2410c', short='Halloween List'),
   dict(repo='childhood-movie-list', h1="Hert's Childhood List", kw='80s and 90s childhood movies for Stremio',
        title="80s and 90s Kids Movies for Stremio: Hert's Childhood List",
