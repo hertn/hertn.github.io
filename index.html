@@ -79,7 +79,7 @@ h1{font-size:1.45rem;line-height:1.15;font-weight:700;letter-spacing:-.02em;marg
 /* tab panels */
 main{padding-top:4px}
 [role="tabpanel"]{animation:in .28s ease}
-@keyframes in{from{opacity:0;transform:translateY(6px)}}
+@keyframes in{from{opacity:0;transform:translate(var(--from-x,0),var(--from-y,6px))}}
 .group{background:var(--card);-webkit-backdrop-filter:blur(20px) saturate(160%);backdrop-filter:blur(20px) saturate(160%);border-radius:26px;overflow:hidden;margin-bottom:14px;box-shadow:inset 0 0 0 .5px var(--glass-edge)}
 .group-h{margin-top:4px;font-size:.78rem;color:var(--text-2);font-weight:600;text-transform:uppercase;letter-spacing:.02em;margin:0 20px 7px}
 
@@ -129,7 +129,7 @@ main{padding-top:4px}
 .seg{position:relative;display:grid;grid-auto-flow:column;grid-auto-columns:1fr;max-width:508px;margin:0 auto;padding:3px;border-radius:999px;background:var(--track);touch-action:none;user-select:none;-webkit-user-select:none}
 .lens{position:absolute;top:3px;bottom:3px;left:0;border-radius:999px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.18),0 0 1px rgba(0,0,0,.2);transition:transform .35s cubic-bezier(.3,1.3,.5,1),width .35s;pointer-events:none}
 .seg.drag .lens{transition:transform .08s linear;scale:1.06}
-.seg button{position:relative;appearance:none;border:0;background:none;color:var(--text);font:600 .88rem/1 inherit;font-family:inherit;min-height:34px;padding:0 4px;border-radius:999px;cursor:pointer;transition:color .2s}
+.seg button{position:relative;appearance:none;border:0;background:none;color:var(--text);font-family:inherit;font-size:1rem;font-weight:600;line-height:1;min-height:38px;padding:0 4px;border-radius:999px;cursor:pointer;transition:color .2s}
 .seg button[aria-selected="true"],.seg button.over{color:#000}
 .seg.drag button[aria-selected="true"]:not(.over){color:var(--text)}
 
@@ -352,6 +352,8 @@ function render(sections) {
     if (opts.focus) pick.tab.focus();
     if (opts.save) history.replaceState(null, '', '#' + pick.id);
     if (current && current !== pick && tabs.parentNode.getBoundingClientRect().top <= 1) scrollTo(0, root.offsetTop - tabs.parentNode.offsetHeight);  // switching while scrolled: show the new tab from its top
+    if (opts.dir) { pick.panel.style.setProperty('--from-x', opts.dir * 40 + 'px'); pick.panel.style.setProperty('--from-y', '0'); }
+    else { pick.panel.style.removeProperty('--from-x'); pick.panel.style.removeProperty('--from-y'); }
     current = pick;
   };
   panels.forEach((p, i) => {
@@ -393,6 +395,20 @@ function render(sections) {
   tabs.addEventListener('pointerup', end);
   tabs.addEventListener('pointercancel', (e) => { if (drag) { drag = null; tabs.classList.remove('drag'); panels.forEach((p) => p.tab.classList.remove('over')); placeLens(current.tab); } });
   addEventListener('resize', () => current && placeLens(current.tab));
+  // Swipe left or right anywhere on the content to go to the next or previous tab.
+  // Passive listeners, so vertical scrolling is untouched; swipes from the screen edge are left to the browser's back gesture.
+  let swipe = null;
+  root.addEventListener('touchstart', (e) => {
+    const t = e.touches[0];
+    swipe = e.touches.length === 1 && t.clientX > 24 && t.clientX < innerWidth - 24 ? {x: t.clientX, y: t.clientY} : null;
+  }, {passive: true});
+  root.addEventListener('touchend', (e) => {
+    if (!swipe) return;
+    const t = e.changedTouches[0], dx = t.clientX - swipe.x, dy = t.clientY - swipe.y; swipe = null;
+    if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+    const i = panels.indexOf(current) + (dx < 0 ? 1 : -1);
+    if (i >= 0 && i < panels.length) show(panels[i].id, {save: true, dir: dx < 0 ? 1 : -1});
+  }, {passive: true});
   show(location.hash.slice(1));
   addEventListener('hashchange', () => show(location.hash.slice(1)));
 }
