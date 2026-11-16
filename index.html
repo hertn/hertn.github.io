@@ -40,13 +40,13 @@
    Liquid Glass tab bar at the bottom that you can slide a finger across. Phone first. */
 :root{
   color-scheme:light dark;
-  --bg:#dfe6ee; --wash:rgba(255,255,255,.42); --card:rgba(255,255,255,.72); --text:#000000; --text-2:rgba(40,40,48,.66); --sep:rgba(60,60,67,.16);
+  --bg:#dfe6ee; --page:#90a3b1; --wash:rgba(255,255,255,.42); --card:rgba(255,255,255,.72); --text:#000000; --text-2:rgba(40,40,48,.66); --sep:rgba(60,60,67,.16);
   --fill:rgba(120,120,128,.12); --tint:#007aff; --yt:#ff0033; --ig:#0095f6;
   --track:rgba(255,255,255,.45); --glass:rgba(249,249,251,.82); --glass-edge:rgba(255,255,255,.75); --lens:rgba(120,120,128,.16);
   --shadow:0 8px 32px rgba(0,0,0,.12),0 1px 3px rgba(0,0,0,.08);
 }
 @media (prefers-color-scheme:dark){:root{
-  --bg:#101318; --wash:rgba(0,0,0,.5); --card:rgba(255,255,255,.12); --text:#ffffff; --text-2:rgba(235,235,245,.7); --sep:rgba(255,255,255,.14);
+  --bg:#101318; --page:#20303c; --wash:rgba(0,0,0,.5); --card:rgba(255,255,255,.12); --text:#ffffff; --text-2:rgba(235,235,245,.7); --sep:rgba(255,255,255,.14);
   --fill:rgba(120,120,128,.24); --tint:#0a84ff;
   --track:rgba(255,255,255,.14); --glass:rgba(30,30,33,.82); --glass-edge:rgba(255,255,255,.14); --lens:rgba(255,255,255,.14);
   --shadow:0 8px 32px rgba(0,0,0,.5);
@@ -57,8 +57,9 @@
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;touch-action:pan-y}
 body{overflow-x:clip}
-body::before{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(var(--wash),var(--wash)),url("photos/wall.jpg") center/cover var(--bg)}
-body{margin:0;background:var(--bg);color:var(--text);font:17px/1.4 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+/* Safari 26 tints its top/bottom bars from the page colour, not the photo, and its fixed layer stops short of the bars: so --page is the photo's average colour and the layer overhangs. */
+body::before{content:"";position:fixed;inset:-120px 0;z-index:-1;background:linear-gradient(var(--wash),var(--wash)),url("photos/wall.jpg") center/cover var(--page)}
+body{margin:0;background:var(--page);color:var(--text);font:17px/1.4 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
 a{color:inherit;text-decoration:none}
 a:focus-visible,button:focus-visible{outline:2px solid var(--tint);outline-offset:3px;border-radius:12px}
 .wrap{max-width:540px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
@@ -79,7 +80,7 @@ h1{font-size:1.45rem;line-height:1.15;font-weight:700;letter-spacing:-.02em;marg
 
 /* tab panels */
 main{padding-top:4px;position:relative}
-[role="tabpanel"]{animation:in .28s ease}
+[role="tabpanel"],footer.in{animation:in .28s ease}
 main.paging{will-change:transform}
 .seg.swiping button[aria-selected="true"]:not(.over){color:var(--text)}
 .seg.swiping button{transition:none}
@@ -367,6 +368,7 @@ function render(sections) {
     if (opts.focus) pick.tab.focus();
     if (opts.save) history.replaceState(null, '', '#' + pick.id);
     if (current && current !== pick && tabs.parentNode.getBoundingClientRect().top <= 1) scrollTo(0, root.offsetTop - tabs.parentNode.offsetHeight);  // switching while scrolled: show the new tab from its top
+    if (current && current !== pick) { const f = document.querySelector('footer'); f.classList.remove('in'); void f.offsetWidth; f.classList.add('in'); }  // fade the footer in with the new panel instead of it jumping first
     current = pick;
   };
   panels.forEach((p, i) => {
