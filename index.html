@@ -80,11 +80,13 @@ h1{font-size:1.45rem;line-height:1.15;font-weight:700;letter-spacing:-.02em;marg
 
 /* tab panels */
 main{padding-top:4px;position:relative}
-[role="tabpanel"],footer.in{animation:in .28s ease}
+[role="tabpanel"]{animation:in .28s ease}
+footer.in{animation:fade .28s ease}  /* opacity only: sliding up looked like the page jumping */
 main.paging{will-change:transform}
 .seg.swiping button[aria-selected="true"]:not(.over){color:var(--text)}
 .seg.swiping button{transition:none}
 @keyframes in{from{opacity:0;transform:translateY(6px)}}
+@keyframes fade{from{opacity:0}}
 .group{background:var(--card);border-radius:26px;overflow:hidden;margin-bottom:14px;box-shadow:inset 0 0 0 .5px var(--glass-edge)}
 .group-h{margin-top:4px;font-size:.78rem;color:var(--text-2);font-weight:600;text-transform:uppercase;letter-spacing:.02em;margin:0 20px 7px}
 
