@@ -121,14 +121,19 @@ JS = '''<script>
 '''
 def attr(a, k): m = re.search(k + r'="([^"]*)"', a); return m.group(1) if m else ''
 
+def unesc(x):
+    """undo every layer of escaping: alts read from the page are escaped again on output (earlier builds stacked &amp;amp;...)"""
+    while (y := html.unescape(x)) != x: x = y
+    return x
+
 def shots_of(s):
     """(src, alt, caption) in page order: the hero shot first, then the screenshots section; or from an existing gallery."""
     out = []
     if 'id="gal"' in s:
-        for b in re.finditer(r'<button type="button" data-src="([^"]*)" data-cap="([^"]*)"[^>]*><img [^>]*alt="([^"]*)"', s): out.append((b.group(1), b.group(3), html.unescape(b.group(2))))
+        for b in re.finditer(r'<button type="button" data-src="([^"]*)" data-cap="([^"]*)"[^>]*><img [^>]*alt="([^"]*)"', s): out.append((b.group(1), unesc(b.group(3)), unesc(b.group(2))))
         return out
     for a in re.finditer(r'<a class="(?:heroshot|thumb)" href="([^"]+)"[^>]*data-cap="([^"]*)"[^>]*>\s*<img ([^>]*)>', s):
-        if a.group(1) not in [o[0] for o in out]: out.append((a.group(1), attr(a.group(3), 'alt'), html.unescape(a.group(2))))
+        if a.group(1) not in [o[0] for o in out]: out.append((a.group(1), unesc(attr(a.group(3), 'alt')), unesc(a.group(2))))
     return out
 
 def gallery_html(shots):
