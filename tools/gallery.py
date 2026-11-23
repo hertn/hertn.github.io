@@ -15,6 +15,7 @@ section.wrap{padding-top:56px;padding-bottom:56px}   /* .wrap's side padding wou
 .gal-stage{position:relative;height:0;padding-top:62.5%;background:#0c0b0e;border:1px solid rgba(255,255,255,.12);border-radius:14px;overflow:hidden}   /* a 16:10 frame (padding trick: older Safari has no aspect-ratio) */
 .gal-stage img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;display:block}   /* the whole picture always fits, never cropped */
 .gal-btn{flex:0 0 auto;width:44px;height:44px;border-radius:50%;border:0;background:rgba(120,120,128,.24);color:#fff;font-size:28px;line-height:1;cursor:pointer;display:grid;place-items:center;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.gal-btn svg{width:22px;height:22px;display:block}
 .gal-btn:hover{background:rgba(120,120,128,.4)}
 .gal-btn:focus-visible{outline:3px solid #fff;outline-offset:2px}
 .gal-on{position:absolute;top:50%;transform:translateY(-50%);background:rgba(20,20,24,.7);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}   /* arrows on the big picture */
@@ -143,8 +144,8 @@ def gallery_html(shots):
     return f'''  <section class="wrap gal" id="gal" aria-label="Screenshots">
     <div class="gal-stage">
       <img id="galImg" src="{e(s0[0])}" alt="{e(s0[1])}">
-      <button type="button" class="gal-btn gal-on gal-prev" id="galPrev" aria-label="Previous screenshot">‹</button>
-      <button type="button" class="gal-btn gal-on gal-next" id="galNext" aria-label="Next screenshot">›</button>
+      <button type="button" class="gal-btn gal-on gal-prev" id="galPrev" aria-label="Previous screenshot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button type="button" class="gal-btn gal-on gal-next" id="galNext" aria-label="Next screenshot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
     </div>
     <p class="gal-cap" id="galCap">{e(s0[2])}  ·  1 of {len(shots)}</p>
     <div class="gal-strip">
@@ -154,9 +155,9 @@ def gallery_html(shots):
         <img id="lbImg" src="" alt="" draggable="false">
         <p class="gal-lb-cap" id="lbCap"></p>
       </div>
-      <button type="button" class="gal-btn gal-prev" id="lbPrev" aria-label="Previous screenshot">‹</button>
-      <button type="button" class="gal-btn gal-next" id="lbNext" aria-label="Next screenshot">›</button>
-      <button type="button" class="gal-btn gal-close" id="lbClose" aria-label="Close">×</button>
+      <button type="button" class="gal-btn gal-prev" id="lbPrev" aria-label="Previous screenshot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button type="button" class="gal-btn gal-next" id="lbNext" aria-label="Next screenshot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+      <button type="button" class="gal-btn gal-close" id="lbClose" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
       <div class="gal-zoom" role="group" aria-label="Zoom">
         <button type="button" id="lbOut" aria-label="Zoom out">−</button>
         <span id="lbZoom" aria-live="polite">100%</span>
